@@ -153,10 +153,10 @@ export default function HeaderSection({ personal, stats }) {
               <Mail size={16} />
               <span>Contact Candidate</span>
             </a>
-            <button onClick={() => window.print()} className="btn btn-secondary btn-sm">
+            <a href={personal.pdfCvUrl || "/Dhilushan_CV.pdf"} download="Dhilushan_CV.pdf" className="btn btn-secondary btn-sm">
               <Download size={16} />
-              <span>Download CV (PDF)</span>
-            </button>
+              <span>Download CV</span>
+            </a>
           </div>
         </div>
 

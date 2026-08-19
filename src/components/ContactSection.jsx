@@ -96,10 +96,10 @@ export default function ContactSection({ personal }) {
                 </a>
               )}
             </div>
-            <button onClick={() => window.print()} className="btn btn-primary btn-sm no-print">
+            <a href={personal.pdfCvUrl || "/Dhilushan_CV.pdf"} download="Dhilushan_CV.pdf" className="btn btn-primary btn-sm no-print">
               <Download size={15} />
-              <span>Print CV</span>
-            </button>
+              <span>Download CV</span>
+            </a>
           </div>
         </div>
 

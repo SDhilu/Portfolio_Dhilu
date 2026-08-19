@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Sun, Printer, Menu, X, Briefcase, Code, FolderGit2, GraduationCap, Mail } from 'lucide-react';
+import { Moon, Sun, Printer, Download, Menu, X, Briefcase, Code, FolderGit2, GraduationCap, Mail } from 'lucide-react';
 
 export default function Navbar({ theme, toggleTheme, activeSection }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -114,16 +114,27 @@ export default function Navbar({ theme, toggleTheme, activeSection }) {
 
         {/* Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {/* Download CV button */}
+          <a
+            href="/Dhilushan_CV.pdf"
+            download="Dhilushan_CV.pdf"
+            className="btn btn-secondary btn-sm"
+            title="Download Dhilushan_CV.pdf"
+            style={{ gap: '0.4rem' }}
+          >
+            <Download size={15} />
+            <span className="print-btn-text">Download CV</span>
+          </a>
+
           {/* Print CV button */}
-          <button
+          {/* <button
             onClick={handlePrint}
             className="btn btn-secondary btn-sm"
             title="Print or Save CV as PDF"
-            style={{ gap: '0.4rem' }}
+            style={{ gap: '0.4rem', padding: '0.5rem' }}
           >
             <Printer size={15} />
-            <span className="print-btn-text">Print PDF</span>
-          </button>
+          </button> */}
 
           {/* Theme Switcher */}
           <button
