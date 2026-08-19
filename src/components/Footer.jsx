@@ -32,7 +32,7 @@ export default function Footer({ name, title }) {
             {name}
           </div>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-            {title} • Designed for Job Applications & CV Showcase
+            {title}
           </div>
         </div>
 
