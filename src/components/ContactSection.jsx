@@ -5,15 +5,46 @@ import { GithubIcon, LinkedinIcon } from './SocialIcons';
 export default function ContactSection({ personal }) {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 4000);
+
+    setIsSending(true);
+    const targetEmail = personal.email || 'sdhilushan20@gmail.com';
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject || `Portfolio Contact Message from ${formData.name}`,
+          message: formData.message,
+          _captcha: 'false'
+        })
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSubmitted(false), 6000);
+      } else {
+        // Fallback to mailto link
+        window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+        setSubmitted(true);
+      }
+    } catch (err) {
+      window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      setSubmitted(true);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -200,9 +231,9 @@ export default function ContactSection({ personal }) {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem', width: '100%' }}>
+              <button type="submit" disabled={isSending} className="btn btn-primary" style={{ marginTop: '0.5rem', width: '100%', opacity: isSending ? 0.7 : 1 }}>
                 <Send size={16} />
-                <span>Send Message</span>
+                <span>{isSending ? 'Sending Message...' : 'Send Message'}</span>
               </button>
             </form>
           )}

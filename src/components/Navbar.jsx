@@ -72,9 +72,9 @@ export default function Navbar({ theme, toggleTheme, activeSection }) {
             }}
           />
           <span>Dhilushan Sivakumar</span>
-          <span className="badge" style={{ fontSize: '0.7rem', padding: '0.15rem 0.5rem', marginLeft: '0.25rem' }}>
+          {/* <span className="badge" style={{ fontSize: '0.7rem', padding: '0.15rem 0.5rem', marginLeft: '0.25rem' }}>
             CV Mode
-          </span>
+          </span> */}
         </a>
 
         {/* Desktop Navigation */}
